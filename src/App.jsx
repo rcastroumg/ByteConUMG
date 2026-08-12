@@ -36,6 +36,8 @@ const ribbonEvents = [...pastEvents, ...pastEvents, ...pastEvents];
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [announcementVisible, setAnnouncementVisible] = useState(false);
+  const announcementRef = useRef(null);
   const eventsSectionRef = useRef(null);
   const eventsRibbonRef = useRef(null);
   const closeMenu = () => setMenuOpen(false);
@@ -71,6 +73,20 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const announcement = announcementRef.current;
+    if (!announcement) return undefined;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      setAnnouncementVisible(true);
+      observer.disconnect();
+    }, { threshold: 0.2 });
+
+    observer.observe(announcement);
+    return () => observer.disconnect();
+  }, []);
+
   return <>
     <a className="skip-link" href="#main">Saltar al contenido</a>
     <header className="site-header">
@@ -82,7 +98,7 @@ export default function App() {
     </header>
     <main id="main">
       <section id="inicio" className="hero"><div className="orbit orbit-one" /><div className="orbit orbit-two" /><p className="eyebrow">Congreso Tecnológico de Sistemas</p><h1>EL FUTURO<br />SE <em>PIENSA.</em><br />SE CONSTRUYE.</h1><div className="hero-bottom"><p>BYTECON UMG · 2026<br />TECNOLOGÍA · IDEAS · COMUNIDAD</p><a className="button button-dark" href="#entradas">Quiero estar <span>↘</span></a></div><div className="hero-number" aria-hidden="true">26</div></section>
-      <section className="announcement" aria-label="Anuncio del evento"><a href="https://postimg.cc/svf2cjrx" target="_blank" rel="noreferrer"><img src="https://i.postimg.cc/02DJ9jXY/Anuncio.png" alt="ByteCon UMG 2026: El futuro está cargando. 17 de octubre de 2026." /></a></section>
+      <section className={`announcement${announcementVisible ? ' announcement-visible' : ''}`} ref={announcementRef} aria-label="Anuncio del evento"><img src="https://desarrolloweb.s3.us-east-1.amazonaws.com/ByteConUMG/Anuncio.png" alt="ByteCon UMG 2026: El futuro está cargando. 17 de octubre de 2026." /></section>
       <section className="manifesto"><p className="section-label">[ 01 / EL CONGRESO ]</p><div><h2>Una mirada al <i>futuro de sistemas.</i></h2><p className="lead">Un espacio para aprender, crear conexiones y descubrir las ideas que están transformando el mundo tecnológico.</p></div></section>
       <section id="eventos" className="past-events" ref={eventsSectionRef}><div className="past-events-sticky"><div className="past-events-heading"><p className="section-label">[ 02 / MEMORIA ]</p><h2>Eventos<br /><i>anteriores.</i></h2><p>Desliza para recorrer los momentos que ya nos conectaron.</p></div><div className="events-window"><div className="events-ribbon" ref={eventsRibbonRef}>{ribbonEvents.map((event, index) => <figure className="event-card" key={`${event.label}-${index}`} aria-hidden={index >= pastEvents.length}><img src={event.image} alt={index < pastEvents.length ? event.alt : ''} loading={index === 0 ? 'eager' : 'lazy'} /><figcaption><span>BYTECON UMG</span>{event.label}</figcaption></figure>)}</div></div><p className="scroll-cue" aria-hidden="true">SCROLL PARA AVANZAR <span>↓</span></p></div></section>
       <section id="ponentes" className="speakers section-dark"><div className="section-heading"><p className="section-label">[ 03 / VOCES ]</p><h2>Personas que <i>crean</i> futuro.</h2><p>Conocimiento, experiencias reales y comunidad tecnológica en un mismo lugar.</p></div><div className="speaker-grid">{speakers.map(([color, portrait, initials, name, role, city]) => <article className={`speaker ${color}`} key={name}><div className={`portrait ${portrait}`}><span>{initials}</span></div><div className="speaker-info"><p>{name}</p><span>{role}<br />{city}</span></div></article>)}</div><a className="text-link" href="#programa">Conoce al resto de la comunidad <span>→</span></a></section>
