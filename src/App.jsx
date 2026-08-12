@@ -90,6 +90,6 @@ export default function App() {
       <section id="experiencia" className="experience"><p className="section-label">[ 05 / MÁS ALLÁ DEL AULA ]</p><div className="experience-copy"><h2>Más que<br />un <i>congreso.</i></h2><p>Una comunidad que conversa, colabora y comparte desafíos. ByteCon reúne a quienes quieren convertir sus ideas en tecnología con impacto.</p></div><div className="sticker sticker-one">IDEAS<br />QUE<br />CONECTAN</div><div className="sticker sticker-two">HECHO<br />EN<br />COMUNIDAD</div><div className="experience-image" role="img" aria-label="Personas conversando en un evento" /></section>
       <section id="entradas" className="tickets"><p className="section-label">[ 06 / PARTICIPA ]</p><h2>Tu lugar en<br />la <i>conversación.</i></h2><div className="ticket-card"><p>BYTECON UMG 2026</p><strong>01<span>ª</span></strong><ul><li>Charlas y conferencias</li><li>Laboratorios tecnológicos</li><li>Comunidad y networking</li></ul><a href="mailto:consis@umg.edu.gt?subject=ByteCon UMG 2026" className="button button-lime">Solicitar información <span>↗</span></a></div></section>
     </main>
-    <footer><p>BYTECON UMG 2026</p><p>CONGRESO TECNOLÓGICO DE SISTEMAS</p><a href="mailto:consis@umg.edu.gt">CONSIS@UMG.EDU.GT ↗</a></footer>
+    <footer><p>BYTECON UMG 2026</p><p>CONGRESO TECNOLÓGICO DE SISTEMAS.</p><a href="mailto:consis@umg.edu.gt">CONSIS@UMG.EDU.GT ↗</a></footer>
   </>;
 }
