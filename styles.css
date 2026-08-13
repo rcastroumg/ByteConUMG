@@ -27,6 +27,38 @@ a {
     text-decoration: none;
 }
 
+[data-reveal] {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity .55s ease, transform .55s cubic-bezier(.2, .8, .2, 1);
+}
+
+[data-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.event-highlights.is-visible article,
+.sponsor-grid.is-visible .sponsor-card,
+.schedule-list.is-visible .talk {
+    animation: reveal-item .45s both;
+}
+
+.event-highlights.is-visible article:nth-child(2),
+.sponsor-grid.is-visible .sponsor-card:nth-child(2),
+.schedule-list.is-visible .talk:nth-of-type(2) { animation-delay: .08s; }
+
+.event-highlights.is-visible article:nth-child(3),
+.schedule-list.is-visible .talk:nth-of-type(3) { animation-delay: .16s; }
+
+.event-highlights.is-visible article:nth-child(4),
+.schedule-list.is-visible .talk:nth-of-type(4) { animation-delay: .24s; }
+
+@keyframes reveal-item {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .skip-link {
     position: absolute;
     left: -999px;
@@ -99,13 +131,25 @@ a {
     align-items: center;
 }
 
-.social-links span {
+.social-links a {
     width: 1.35rem;
     height: 1.35rem;
     display: grid;
     place-items: center;
-    color: var(--lime);
-    opacity: .7;
+    transition: transform .2s ease;
+}
+
+.social-links a:hover {
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+.facebook-link {
+    color: #1877f2;
+}
+
+.instagram-link {
+    color: #e4405f;
 }
 
 .social-links svg {
@@ -579,6 +623,49 @@ h2 i {
     font-size: 1.2rem;
 }
 
+.sponsors {
+    padding: 7rem 8vw;
+    background: #06172c;
+}
+
+.sponsors-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.sponsors h2 {
+    font-size: clamp(3rem, 6vw, 6rem);
+}
+
+.sponsors h2 i {
+    color: var(--lime);
+}
+
+.sponsor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 4rem;
+}
+
+.sponsor-card {
+    min-height: 220px;
+    padding: 2.5rem;
+    display: grid;
+    place-items: center;
+    background: #fff;
+    border-radius: 1rem;
+}
+
+.sponsor-card img {
+    display: block;
+    width: min(100%, 210px);
+    max-height: 140px;
+    object-fit: contain;
+}
+
 .schedule {
     padding: 7rem 4vw;
     background: #06172c;
@@ -815,6 +902,64 @@ h2 i {
     box-shadow: 3px 3px 0 #bd67f3;
 }
 
+.venue {
+    padding: 7rem 8vw;
+    background: #06172c;
+}
+
+.venue-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 1rem;
+    margin: 2rem 0 1rem;
+}
+
+.venue-info,
+.venue-media {
+    min-height: 360px;
+    padding: 3rem;
+    border: 1px solid var(--line);
+}
+
+.venue-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #0a213a;
+}
+
+.venue-info h2 {
+    font-size: clamp(3.5rem, 6vw, 6rem);
+}
+
+.venue-info h2 i {
+    color: var(--lime);
+}
+
+.venue-info p {
+    max-width: 330px;
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.45;
+}
+
+.venue-media {
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, rgba(82, 227, 242, .16), rgba(139, 99, 255, .28));
+    text-align: center;
+    font: 500 .8rem/1.5 "DM Mono", monospace;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.venue-map iframe {
+    display: block;
+    width: 100%;
+    height: 450px;
+    border: 0;
+}
+
 footer {
     background: var(--paper);
     color: var(--ink);
@@ -1013,6 +1158,22 @@ footer {
         margin-top: 3rem;
     }
 
+    .sponsors {
+        padding: 5rem 6vw;
+    }
+
+    .sponsors-heading {
+        display: block;
+    }
+
+    .sponsors-heading h2 {
+        margin-top: 2rem;
+    }
+
+    .sponsor-grid {
+        margin-top: 2.5rem;
+    }
+
     .schedule-intro {
         position: static;
     }
@@ -1056,6 +1217,24 @@ footer {
         padding: 5rem 6vw 28rem;
     }
 
+    .venue {
+        padding: 5rem 6vw;
+    }
+
+    .venue-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .venue-info,
+    .venue-media {
+        min-height: 260px;
+        padding: 2rem;
+    }
+
+    .venue-map iframe {
+        height: 340px;
+    }
+
     .ticket-card {
         top: auto;
         bottom: 5rem;
@@ -1094,6 +1273,18 @@ footer {
 }
 
 @media (prefers-reduced-motion:reduce) {
+    [data-reveal] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .event-highlights.is-visible article,
+    .sponsor-grid.is-visible .sponsor-card,
+    .schedule-list.is-visible .talk {
+        animation: none;
+    }
+
     .events-ribbon {
         transform: none !important;
     }
