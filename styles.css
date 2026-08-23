@@ -348,6 +348,7 @@ h2 i {
     display: grid;
     grid-template-columns: 1fr 2.2fr;
     gap: 4rem;
+    /* place-items: center; */
 }
 
 .manifesto h2 {
@@ -365,7 +366,7 @@ h2 i {
 .event-highlights {
     grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: .8rem;
     margin-top: 4rem;
 }
@@ -1007,13 +1008,43 @@ footer {
 }
 
 .scroll-top-button,
-.social-toggle { background: var(--paper); border: 1px solid var(--lime); }
-.floating-facebook { background: #1877f2; }
-.floating-instagram { background: #e4405f; }
-.whatsapp-button { background: #25d366; }
+.social-toggle {
+    background: var(--paper);
+    border: 1px solid var(--lime);
+}
 
-.floating-social-menu { display: grid; gap: .7rem; max-height: 0; overflow: hidden; visibility: hidden; pointer-events: none; opacity: 0; transform: translateY(12px); transition: max-height .3s ease, opacity .2s ease, transform .3s ease, visibility 0s linear .3s; }
-.floating-socials.open .floating-social-menu { max-height: 14rem; visibility: visible; pointer-events: auto; opacity: 1; transform: translateY(0); transition-delay: 0s; }
+.floating-facebook {
+    background: #1877f2;
+}
+
+.floating-instagram {
+    background: #e4405f;
+}
+
+.whatsapp-button {
+    background: #25d366;
+}
+
+.floating-social-menu {
+    display: grid;
+    gap: .7rem;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: max-height .3s ease, opacity .2s ease, transform .3s ease, visibility 0s linear .3s;
+}
+
+.floating-socials.open .floating-social-menu {
+    max-height: 14rem;
+    visibility: visible;
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0s;
+}
 
 .floating-socials a:hover,
 .social-toggle:hover {
@@ -1030,6 +1061,144 @@ footer {
 .floating-socials svg {
     width: 2rem;
     fill: currentColor;
+}
+
+.raffle-modal-backdrop {
+    position: fixed;
+    z-index: 20;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 1.5rem;
+    background: rgba(2, 11, 24, .84);
+    backdrop-filter: blur(8px);
+    animation: raffle-backdrop-in .25s ease-out;
+}
+
+.raffle-modal {
+    width: min(100%, 1040px);
+    max-height: calc(100vh - 3rem);
+    overflow: auto;
+    position: relative;
+    padding: clamp(2rem, 5vw, 4.25rem);
+    background: #0a213a;
+    border: 1px solid var(--lime);
+    box-shadow: 12px 12px 0 var(--pink);
+    animation: raffle-modal-in .35s cubic-bezier(.2, .8, .2, 1);
+}
+
+.raffle-modal-heading {
+    padding-right: 3rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.raffle-modal-heading p {
+    margin-bottom: 1.25rem;
+    color: var(--lime);
+    font: 500 .7rem "DM Mono", monospace;
+    letter-spacing: .08em;
+}
+
+.raffle-modal h2 {
+    margin-bottom: 2rem;
+    font-size: clamp(3rem, 6vw, 5.75rem);
+}
+
+.raffle-modal h2 i {
+    color: var(--lime);
+}
+
+.raffle-modal-close {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.1rem;
+    width: 2.6rem;
+    aspect-ratio: 1;
+    border: 1px solid var(--ink);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    font: 400 2rem/1 "DM Mono", monospace;
+}
+
+.raffle-modal-close:hover,
+.raffle-modal-close:focus-visible {
+    background: var(--lime);
+    color: var(--paper);
+    outline: none;
+}
+
+.raffle-modal-content {
+    display: grid;
+    grid-template-columns: minmax(220px, .85fr) minmax(0, 1.15fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    padding: 2rem 0;
+}
+
+.raffle-modal-copy {
+    font-size: 1rem;
+    line-height: 1.55;
+}
+
+.raffle-modal-copy p:last-child {
+    margin-bottom: 0;
+}
+
+.raffle-modal-copy strong {
+    color: var(--lime);
+}
+
+.raffle-modal-media {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .75rem;
+}
+
+.raffle-modal-media video {
+    grid-column: 1 / -1;
+}
+
+.raffle-modal-media video,
+.raffle-modal-media img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border: 1px solid rgba(82, 227, 242, .45);
+    background: #06172c;
+}
+
+.raffle-modal-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    padding: .95rem 1.15rem;
+    border: 1px solid var(--lime);
+    background: var(--lime);
+    color: var(--paper);
+    cursor: pointer;
+    font: 500 .74rem "DM Mono", monospace;
+    text-transform: uppercase;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.raffle-modal-button:hover,
+.raffle-modal-button:focus-visible {
+    transform: translate(-3px, -3px);
+    box-shadow: 3px 3px 0 var(--pink);
+    outline: none;
+}
+
+@keyframes raffle-backdrop-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes raffle-modal-in {
+    from { opacity: 0; transform: translateY(1.25rem) scale(.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @keyframes scroll-cue {
@@ -1267,6 +1436,21 @@ footer {
         height: 340px;
     }
 
+    .raffle-modal-backdrop {
+        padding: .75rem;
+    }
+
+    .raffle-modal {
+        max-height: calc(100vh - 1.5rem);
+        padding: 2rem 1.25rem;
+        box-shadow: 6px 6px 0 var(--pink);
+    }
+
+    .raffle-modal-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
     .ticket-card {
         top: auto;
         bottom: 5rem;
@@ -1329,5 +1513,10 @@ footer {
         opacity: 1;
         transform: none;
         transition: none;
+    }
+
+    .raffle-modal-backdrop,
+    .raffle-modal {
+        animation: none;
     }
 }
