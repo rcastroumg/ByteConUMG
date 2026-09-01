@@ -1255,13 +1255,19 @@ footer {
 }
 
 .raffle-modal-media video,
-.raffle-modal-media img {
+.raffle-modal-media img,
+.raffle-modal-media iframe {
     display: block;
     width: 100%;
     aspect-ratio: 16 / 10;
     object-fit: cover;
     border: 1px solid rgba(82, 227, 242, .45);
     background: #06172c;
+}
+
+.raffle-modal-media iframe {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
 }
 
 .raffle-modal-button {
