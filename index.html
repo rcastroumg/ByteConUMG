@@ -1,17 +1,52 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="ByteCon UMG 2026: Congreso Tecnológico de Sistemas." />
-    <title>ByteCon UMG 2026</title>
-    <link rel="icon" type="image/jpeg" href="/media/Logo.jpg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ByteCon UMG 2026: Congreso Tecnológico de Sistemas." />
+  <title>ByteCon UMG 2026</title>
+  <link rel="icon" type="image/jpeg" href="/media/Logo.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <script>
+    let player;
+
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player('youtube-player', {
+        videoId: 'H1suqOUnwyI',
+        playerVars: {
+          'autoplay': 1,
+          'mute': 1,
+          'playlist': 'H1suqOUnwyI',
+          'loop': 1,
+          'controls': 0,
+          'playsinline': 1,
+          'rel': 0
+        },
+        events: {
+          'onReady': onPlayerReady
+        }
+      });
+    }
+
+    function onPlayerReady(event) {
+      // Ajusta la velocidad cuando el reproductor esté listo
+      // Valores válidos: 0.25, 0.5, 0.75, 1 (normal), 1.25, 1.5, 2
+      event.target.setPlaybackRate(0.5); // 0.5 = 50% de la velocidad normal
+      event.target.playVideo();
+    }
+  </script>
+</body>
+
 </html>
