@@ -1090,6 +1090,22 @@ h2 i {
     box-shadow: 10px 10px 0 var(--pink);
 }
 
+.sold-out-ribbon {
+    position: absolute;
+    z-index: 1;
+    top: 2.4rem;
+    right: -4rem;
+    width: 13rem;
+    margin: 0;
+    padding: .45rem 0;
+    background: var(--pink);
+    color: #fff;
+    text-align: center;
+    font: 700 .8rem "DM Mono", monospace;
+    letter-spacing: .12em;
+    transform: rotate(45deg);
+}
+
 .ticket-card header {
     padding: 2rem;
     text-align: center;
@@ -1146,6 +1162,16 @@ h2 i {
 
 .ticket-card .button:hover {
     box-shadow: 3px 3px 0 #bd67f3;
+}
+
+.ticket-card .button:disabled {
+    cursor: not-allowed;
+    opacity: .55;
+}
+
+.ticket-card .button:disabled:hover {
+    transform: none;
+    box-shadow: none;
 }
 
 .venue {
